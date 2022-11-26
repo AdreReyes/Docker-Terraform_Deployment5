@@ -36,6 +36,7 @@ pipeline {
                             string(credentialsId: 'DOCKERHUB_SECRET_KEY', variable: 'dockerhub_secret_key')]) {
                                   sh '''#!/bin/bash
                                   sudo curl https://github.com/AdreReyes/Docker-Terraform_Deployment5/blob/main/dockerfile > dockerfile
+                                  sudo docker login --username=${dockerhub_access_key} --password=${dockerhub_secret_key}
                                   sudo docker build -t deploy5-image:latest .
                                   sudo docker image push adrereyes1/flask-app:latest
                                   '''
