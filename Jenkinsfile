@@ -34,10 +34,11 @@ pipeline {
           steps {
             withCredentials([string(credentialsId: 'DOCKERHUB_ACCESS_KEY', variable: 'dockerhub_access_key'), 
                             string(credentialsId: 'DOCKERHUB_SECRET_KEY', variable: 'dockerhub_secret_key')]) {
-                                  sh '
+                                  sh '''#!/bin/bash
                                   sudo curl https://github.com/AdreReyes/Docker-Terraform_Deployment5/blob/main/dockerfile > dockerfile
                                   sudo docker build -t deploy5-image:latest .
-                                  sudo docker image push adrereyes1/flask-app:latest'
+                                  sudo docker image push adrereyes1/flask-app:latest
+                                  '''
                                 }
             }
         }
