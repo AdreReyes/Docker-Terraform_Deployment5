@@ -32,7 +32,7 @@ pipeline {
      stage('Build Docker Image') {
        agent{label 'docker_agent'}
           steps {
-            withCredentials([getSecret(credentialsId: 'DOCKERHUB_ACCESS_KEY', variable: 'dockerhub_access_key'), 
+            withCredentials([string(credentialsId: 'DOCKERHUB_ACCESS_KEY', variable: 'dockerhub_access_key'), 
                             getSecret(credentialsId: 'DOCKERHUB_SECRET_KEY', variable: 'dockerhub_secret_key')]) {
                                   sh '''#!/bin/bash
                                   sudo curl https://github.com/AdreReyes/Docker-Terraform_Deployment5/blob/main/dockerfile > dockerfile
