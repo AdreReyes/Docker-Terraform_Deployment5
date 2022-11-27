@@ -32,9 +32,11 @@ pipeline {
       }
     }
      stage ('Create Container') {
-        agent { label 'docker_agent' }
+        agent {label 'docker_agent' }
         steps {
-          sh 'docker build -t imagedp5:v1.0'
+          sh '''#!/bin/bash
+          docker build -t imagedp5:v1.0 .
+          '''
         }
       }
      
