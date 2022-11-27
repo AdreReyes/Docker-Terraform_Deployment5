@@ -47,7 +47,7 @@ pipeline {
                   '''
                 }
             }
-        }
+
       stage('Init') {
         agent{label 'terraform_agent'}
           steps {
@@ -59,6 +59,7 @@ pipeline {
             }
         }
       }
+
       stage('Plan') {
        agent{label 'terraform_agent'}
           steps {
@@ -70,6 +71,7 @@ pipeline {
             }
         }
       }
+
       stage('Deploy to ECS') {
         agent{label 'terraform_agent'}
           steps {
@@ -81,5 +83,6 @@ pipeline {
             }
         }
       }
-      }
+   }
+  }
 }
