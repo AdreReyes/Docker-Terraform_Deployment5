@@ -34,7 +34,7 @@ pipeline {
           steps {
                   sh '''#!/bin/bash
                   sudo curl https://github.com/AdreReyes/Docker-Terraform_Deployment5/blob/main/dockerfile > dockerfile
-                  sudo docker build -t deploy5-image:latest .
+                  sudo docker build -t flask-app:latest .
                   sudo docker image push adrereyes1/flask-app:latest
                   '''
             }
