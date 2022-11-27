@@ -45,7 +45,7 @@ pipeline {
           steps {
                   sh '''#!/bin/bash
                   sudo docker tag imagedp5:v1.0 adrereyes1/flask-app:v1.0
-                  echo $DOCKERHUB_PSW | docker login -u $DOCKERHUB_USR --password-stdin
+                  sudo docker login -u $DOCKERHUB_CREDENTIALS_USR -p $DOCKERHUB_CREDENTIALS_PSW
                   sudo docker push adrereyes1/flask-app:v1.0
                   '''
                 }
