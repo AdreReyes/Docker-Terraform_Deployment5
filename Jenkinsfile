@@ -32,11 +32,11 @@ pipeline {
      stage('Build Docker Image') {
        agent{label 'docker_agent'}
           steps {
-            withCredentials([string(credentialsId: 'DOCKERHUB_ACCESS_KEY', variable: 'dockerhub_access_key'), 
-                            string(credentialsId: 'DOCKERHUB_SECRET_KEY', variable: 'dockerhub_secret_key')]) {
+            withCredentials([string(credentialsId: 'cb281c3d-659a-4127-98ba-ebc90ce9a2dd', variable: 'cb281c3d-659a-4127-98ba-ebc90ce9a2dd'), 
+                            string(credentialsId: 'cb281c3d-659a-4127-98ba-ebc90ce9a2dd', variable: 'cb281c3d-659a-4127-98ba-ebc90ce9a2dd')]) {
                                   sh '''#!/bin/bash
                                   sudo curl https://github.com/AdreReyes/Docker-Terraform_Deployment5/blob/main/dockerfile > dockerfile
-                                  sudo docker login --username=${dockerhub_access_key} --password=${dockerhub_secret_key}
+                                  sudo docker login --username=${cb281c3d-659a-4127-98ba-ebc90ce9a2dd} --password=${cb281c3d-659a-4127-98ba-ebc90ce9a2dd}
                                   sudo docker build -t deploy5-image:latest .
                                   sudo docker image push adrereyes1/flask-app:latest
                                   '''
