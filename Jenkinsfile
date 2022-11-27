@@ -35,7 +35,7 @@ pipeline {
         agent {label 'docker_agent' }
         steps {
           sh '''#!/bin/bash
-          docker build -t imagedp5:v1.0 .
+          sudo docker build -t imagedp5:v1.0 .
           '''
         }
       }
@@ -44,9 +44,9 @@ pipeline {
        agent{label 'docker_agent'}
           steps {
                   sh '''#!/bin/bash
-                  docker tag imagedp5:v1.0 adrereyes1/flask-app:v1.0
-                  echo $DOCKERHUB_PSW | docker login -u $DOCKERHUB_USR --password-stdin
-                  docker push adrereyes1/flask-app:v1.0
+                  sudo docker tag imagedp5:v1.0 adrereyes1/flask-app:v1.0
+                  sudo echo $DOCKERHUB_PSW | docker login -u $DOCKERHUB_USR --password-stdin
+                  sudo docker push adrereyes1/flask-app:v1.0
                   '''
                 }
             }
