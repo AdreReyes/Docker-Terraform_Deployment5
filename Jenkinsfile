@@ -1,5 +1,7 @@
 pipeline {
   agent any
+  environment {
+    DOCKERHUB_CREDENTIALS=credentials('dockerhub')
    stages {
     stage ('Build') {
       steps {
@@ -28,15 +30,22 @@ pipeline {
        
       }
     }
-   
-     stage('Build Docker Image') {
+     stage ('Create Container') {
+        agent { label 'docker_agent' }
+        steps {
+          sh 'docker build -t imagedp5:v1.0'
+        }
+      }
+     
+     stage('Push to Dockerhub') {
        agent{label 'docker_agent'}
           steps {
                   sh '''#!/bin/bash
-                  sudo curl https://github.com/AdreReyes/Docker-Terraform_Deployment5/blob/main/dockerfile > dockerfile
-                  sudo docker build -t adrereyes1/flask-app:latest .
-                  sudo docker push adrereyes1/flask-app:latest
+                  docker tag imagedp5:v1.0 adrereyes1/flask-app:v1.0
+                  echo $DOCKERHUB_PSW | docker login -u $DOCKERHUB_USR --password-stdin
+                  docker push adrereyes1/flask-app:v1.0
                   '''
+                }
             }
         }
       stage('Init') {
@@ -61,7 +70,7 @@ pipeline {
             }
         }
       }
-      stage('Apply') {
+      stage('Deploy to ECS') {
         agent{label 'terraform_agent'}
           steps {
             withCredentials([string(credentialsId: 'AWS_ACCESS_KEY', variable: 'aws_access_key'), 
