@@ -35,7 +35,7 @@ pipeline {
         agent {label 'docker_agent' }
         steps {
           sh '''#!/bin/bash
-          sudo docker build -t imagedp5:v1.0 .
+          sudo docker build -t adrereyes1/flask5:latest .
           '''
         }
       }
@@ -44,9 +44,10 @@ pipeline {
        agent{label 'docker_agent'}
           steps {
                   sh '''#!/bin/bash
-                  sudo docker tag imagedp5:v1.0 adrereyes1/flask-app:v1.0
-                  sudo docker login -u “myusername” -p “mypassword” docker.io
-                  sudo docker push adrereyes1/flask-app:v1.0
+                  sudo docker login -u $DOCKERHUB_CREDENTIALS_USR -p $DOCKERHUB_CREDENTIALS_PSW
+                  sudo docker images
+                  sudo docker tag flask5:latest adrereyes1/flask-app:latest
+                  sudo docker push adrereyes1/flask5:latest
                   '''
                 }
             }
